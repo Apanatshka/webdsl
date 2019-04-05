@@ -65,3 +65,4 @@ rules
         ; t := <java-type> s
         ; t1 := <java-type-entity> x_Class
         ; x1 := <java-type-entity-name> x_Class
+        ; e_HibSession := HibSession()

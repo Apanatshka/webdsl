@@ -123,6 +123,7 @@ strategies
         ; bstm* := <statements-to-java-servlet> stat*
         ; origident := <get-original-name> ident
         ; <map(load-init-global-variables-cbds-test(|x_class, pkgname))> <bagof-AllGlobalVars>
+        ; e_HibSession := HibSession()
 
   get-webdsl-test-class-name :
     ident -> <concat-strings> ["TestWebDSL",ident]
@@ -142,3 +143,4 @@ strategies
       }
     ]|
     with  t := <java-type> srt
+        ; e_HibSession := HibSession()

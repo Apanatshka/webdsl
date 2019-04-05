@@ -4,3 +4,4 @@ rules
 
   call-to-java-servlet :
     exp|[ flush() ]| -> java|[ e_HibSession.flush() ]|
+  with e_HibSession := HibSession()

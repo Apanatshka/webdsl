@@ -167,6 +167,7 @@ rules //general rules for creating ref arg class
         ; x_class := <get-type-anno;?SimpleSort(objecttypename);java-type-name> e_object
         ; x_domain := <pp-java5-to-string> <DomainPackage>
         ; x_validatefunction := <get-internal-validate-func-name-int(|f)> x_domain
+        ; e_HibSession := HibSession()
         //emit class
         ; <emit-java-code-local>
             compilation-unit|[

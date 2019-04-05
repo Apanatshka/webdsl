@@ -16,3 +16,4 @@ rules
   hqlstatement-to-create-query :
     e -> <repeat(once-AddQueryParameter)> java|[ e_HibSession.createQuery("~q") ]|
     with  q := <alltd(replace-parameter-java-servlet); pp-hql-to-string; trim-chars('\n')> e
+        ; e_HibSession := HibSession()

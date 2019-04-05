@@ -109,6 +109,7 @@ rules
                                //; x_conversionmethod := "fromString"                                   
                        \});concat> 
                        <bagof-AllGlobalVars <+ ![]>
+        ; e_HibSession := HibSession()
         ; vardeclinits := <bagof-AllGlobalVars <+ ![]>
         // persist right away to get an id
         ; bstm3* := <map(vardeclinit-to-persist-statement-java-servlet <+ pp-aterm(!"vardeclinit-to-persist-statement-java-servlet: ");fail);concat-with-sublists> vardeclinits
@@ -196,6 +197,7 @@ rules
       ; t := <defined-java-type> srt
       ; x_t := <java-type-name> srt
       ; e_vardeclinit := <expression-to-java-servlet> e
+      ; e_HibSession := HibSession()
         
 rules
   
@@ -216,3 +218,4 @@ rules
         return false;
       }
     ]| 
+    with e_HibSession := HibSession()

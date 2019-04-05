@@ -88,6 +88,7 @@ rules // for loops for creating var args in template call
         ; x_type := <java-type-name> srt
         ; list-of-exp-lists := <map(?ExpVarArg(<map(expression-to-java-servlet)>))> expvarargs
         ; bstm* := <map(\e_arg* -> java:bstm|[ add(arg,~<optimize-empty-array> e_arg*); ]| \)> list-of-exp-lists
+        ; e_HibSession := HibSession()
 
   exp-var-arg-to-java-exp :
     (ExpVarArgForCount(x, e1, e2, expvarargs), e) ->

@@ -29,11 +29,13 @@ rules
     with  e3 := <expression-to-java-servlet> e1
         ; e4 := <expression-to-java-servlet> e2
         ; x_domain := <pp-java5-to-string> <DomainPackage>
+        ; e_HibSession := HibSession()
 
   call-to-java-servlet :
     exp |[ loadEntity(e1) ]| -> java |[ utils.PageParamLoad.loadEntityFromParam(e_HibSession, "~x_domain", e2) ]|
     with  x_domain := <pp-java5-to-string> <DomainPackage>
         ; e2 := <expression-to-java-servlet> e1
+        ; e_HibSession := HibSession()
 
   call-to-java-servlet :
     exp |[ e1.getTypeString() ]| -> java |[ e2.get_WebDslEntityType() ]| //get type from the wrapped class

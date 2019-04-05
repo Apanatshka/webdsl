@@ -193,6 +193,7 @@ rules //initialization
         ; not(is-at-arguments; <get-prefetch-for-page-argument> x)
     with  x_class := <java-type-name> srt
         ; x_id := <concat-strings>[x, "_id"]
+        ; e_HibSession := HibSession()
 
   argument-to-java-servlet-initialization :
     arg@farg|[ x : srt ]| ->
@@ -214,6 +215,7 @@ rules //initialization
     with  t := <java-type> srt
         ; x_class := <java-type-name> srt
         ; x_id := <concat-strings>[x, "_id"]
+        ; e_HibSession := HibSession()
         ; e_criteria := expr|[ e_HibSession.createCriteria(x_class.class) ]|
         ; e_joins := <get-direct-fetches> prefetch
 
@@ -225,6 +227,7 @@ rules //initialization
     where SimpleSort("Entity") := srt
     with  x_id := <concat-strings>[x, "_id"]
         ; x_domain := <pp-java5-to-string> <DomainPackage>
+        ; e_HibSession := HibSession()
 
   //ref arg
   argument-to-java-servlet-initialization-ref-arg(|argnum) :
@@ -295,6 +298,7 @@ rules //initialization
     with  t := <java-type> srt
         ; x_class := <java-type-name> srt
         ; x_id := <concat-strings>[x, "_id"]
+        ; e_HibSession := HibSession()
 
   argument-to-java-servlet-initialization :
     arg@farg|[ x : srt ]| ->
@@ -326,6 +330,7 @@ rules //initialization
     with  t := <java-type> srt
         ; x_class := <java-type-name> srt
         ; x_id := <concat-strings>[x, "_id"]
+        ; e_HibSession := HibSession()
         ; e_criteria := expr|[ e_HibSession.createCriteria(x_class.class) ]|
         ; e_joins := <get-direct-fetches> prefetch
 
@@ -350,6 +355,7 @@ rules //initialization
         ; e :=    <java-type-default-value> srt
         ; x_ids := <concat-strings>[x, "_ids"]
         ; x_class := <java-type-name> x2
+        ; e_HibSession := HibSession()
 
   argument-to-java-servlet-initialization : //@TODO List arguments with builtin types, eg. list of strings
     arg@farg|[ x : srt ]| ->

@@ -125,3 +125,4 @@ rules
       }
     ]|
     with  bstm*      := <map(invoke-every-to-init); concat> bagof_all_invokeevery
+       ;  e_HibSession := HibSession()

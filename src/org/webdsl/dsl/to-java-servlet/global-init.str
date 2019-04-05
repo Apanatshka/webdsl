@@ -82,6 +82,7 @@ rules
       }
     ]|
     with  <map(load-init-global-variables-cbds-helper)> <bagof-AllGlobalVars> 
+        ; e_HibSession := HibSession()
     
   load-init-global-variables-cbds-helper :   
     GlobalVarDeclInit(x, srt, e) -> 
@@ -99,6 +100,7 @@ rules
     ]| 
     with  t := <java-type> srt
         ; x_class := <java-type-name> srt
+        ; e_HibSession := HibSession()
 
   GenerateCodeJavaServlet = 
     where(not(InFunction <+ JavaInEntity <+ JavaThisPage <+ ThisTemplateName)) 

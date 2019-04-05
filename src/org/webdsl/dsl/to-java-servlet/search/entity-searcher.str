@@ -184,6 +184,7 @@ strategies
        ; x_Class := <concat-strings> [<pp-java5-to-string> <DomainPackage>, ".", x_class]
        ; x_BaseClass := <get-searchable-root-class-fq> x_class
        ; x_name := <concat-strings> [x_class, "Searcher"]
+       ; e_HibSession := HibSession()
 
   field-to-java-type-name-condition:
       ( fieldName, sortType ) -> java:stm |[ if( field.equals( "~fieldName" )) return e_tp;]|
@@ -205,6 +206,7 @@ strategies
           fieldAnalyzer.addAnalyzer( "~x_fieldName", toAdd );
       ]|
       with x_analyzerName := <concat-strings>[analyzerName, "_QUERY"]
+        ; e_HibSession := HibSession()
 
 
   generate-java-search-functions:

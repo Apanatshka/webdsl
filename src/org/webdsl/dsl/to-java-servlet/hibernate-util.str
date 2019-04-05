@@ -9,14 +9,15 @@ imports
 
 overlays
 
-  e_HibSession =
+  HibSession =
     java:expr |[ utils.HibernateUtil.getCurrentSession() ]|
 
 rules
 
   hibernate-forall-criteria :
     (term{anno*}, t, x, srt, fltr, prefetch) -> e_criteria
-    with e_basecriteria := <try(hibernate-add-cacheable(|anno*))> expr|[ e_HibSession.createCriteria(t.class) ]|
+    with  e_HibSession := HibSession()
+    ; e_basecriteria := <try(hibernate-add-cacheable(|anno*))> expr|[ e_HibSession.createCriteria(t.class) ]|
     ; toonejoins := <is-guided-batching-no-joins < get-alias-joins + get-to-one-joins> prefetch
     ; QueryCondition(querycondition) := <fetch-elem(?QueryCondition(_)) <+ !QueryCondition(True())> anno*
     ; e_criteria := <foldr(!e_basecriteria,hibernate-criteria-join); hibernate-criteria-add-condition(|querycondition,x,srt)> toonejoins
@@ -42,6 +43,7 @@ rules
   get-query-condition-filter :
     QueryConditionFilter(name, vars, types) -> (bstm* |[ e_expr; ]|, bstm* |[ e_HibSession.disableFilter("~name"); ]|)
     with params := <zip>(<length; range> types, <zip> (vars, types))
+    ; e_HibSession := HibSession()
     ; e_expr := <foldr(!expr |[ e_HibSession.enableFilter("~name") ]|, add-filter-param)> params
 
   add-filter-param :
@@ -398,6 +400,7 @@ rules
     ; str := <java-type-name> fsrt
     ; x_list := <concat-strings; newname-webdsl>[x, "Lst"]
     ; e_joins := <get-prefetch-children; get-direct-fetches> children
+    ; e_HibSession := HibSession()
     ; bstm_sub* := <get-prefetch-children; start-build-sub-batches(|e_HibSession, x_list, fsrt)> children
     ; if Some(simplecastsrt@SimpleSort(x_castclass)) := castsrt then
         e_expr := <expression-to-java-servlet> FieldAccess(Cast(v, simplecastsrt), f)
@@ -417,6 +420,7 @@ rules
     where x := f
     ; t := <java-type> fsimplesrt
     ; x_list := <concat-strings; newname-webdsl>[x, "Lst"]
+    ; e_HibSession := HibSession()
     ; bstm_sub* := <get-prefetch-children; start-build-sub-batches(|e_HibSession, x_list, fsimplesrt)> children
     ; if Some(simplecastsrt@SimpleSort(x_castclass)) := castsrt then
         e_expr := <expression-to-java-servlet> FieldAccess(Cast(v, simplecastsrt), f)
@@ -439,6 +443,7 @@ rules
     ; str := <java-type-name> srt
     ; e_joins := <get-prefetch-children; get-direct-fetches> tree
     ; x_list := <concat-strings; newname-webdsl>[x, "Lst"]
+    ; e_HibSession := HibSession()
     ; bstm_sub* := <get-prefetch-children; start-build-sub-batches(|e_HibSession, x_list, srt)> tree
 
   get-batch-fetches-single-simple(|x, srt) :
@@ -447,6 +452,7 @@ rules
                                   ]|
     where str := <java-type-name> srt
     ; e_joins := <get-prefetch-children; get-direct-fetches-no-empty-batch; not(?expr |[ (String[])null ]|)> tree // If no joins are present then this would just be a hibSession.get()
+    ; e_HibSession := HibSession()
 
   get-batch-fetches-filter-hints(|x, srt) :
     PrefetchFor(_, _, _, tree) -> bstm*

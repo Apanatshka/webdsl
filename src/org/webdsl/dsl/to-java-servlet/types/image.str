@@ -98,6 +98,7 @@ rules //image download
     with  e2 := <expression-to-java-servlet> e
        ;  e3 := <expression-to-java-servlet> e_width
        ;  e4 := <expression-to-java-servlet> e_height
+        ; e_HibSession := HibSession()
 
   call-to-java-servlet :
     exp  |[ e.crop(e_x, e_y, e_width, e_height) ]| -> java |[ utils.ImageSizeUtils.cropImage(e_HibSession, e2, e3, e4, e5, e6) ]|
@@ -107,16 +108,19 @@ rules //image download
        ;  e4 := <expression-to-java-servlet> e_y
        ;  e5 := <expression-to-java-servlet> e_width
        ;  e6 := <expression-to-java-servlet> e_height
+        ; e_HibSession := HibSession()
 
   call-to-java-servlet :
     exp  |[ e.getWidth() ]| -> java |[ utils.ImageSizeUtils.getWidth(e_HibSession, e2) ]|
     where SimpleSort("Image") := <get-type-anno> e
     with  e2 := <expression-to-java-servlet> e
+        ; e_HibSession := HibSession()
 
   call-to-java-servlet :
     exp  |[ e.getHeight() ]| -> java |[ utils.ImageSizeUtils.getHeight(e_HibSession, e2) ]|
     where SimpleSort("Image") := <get-type-anno> e
     with  e2 := <expression-to-java-servlet> e
+        ; e_HibSession := HibSession()
 
   call-to-java-servlet :
     exp  |[ e.clone() ]| -> java |[ e2.makeClone() ]|

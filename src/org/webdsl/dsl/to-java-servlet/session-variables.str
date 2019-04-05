@@ -93,6 +93,7 @@ rules
         ; x_ent := <java-type-to-java-name> t_ent
         ; x_s := <concat-strings> ["sesm$",x_ident]
         ; pkgtname_domain := <DomainPackage>
+        ; e_HibSession := HibSession()
 
   call-to-java-servlet :
     ThisCall("getSessionManager", []) ->
@@ -113,6 +114,7 @@ rules
         ; SimpleSort(t) := s
         ; x_class := t
         ; x_type := "java.util.UUID"
+        ; e_HibSession := HibSession()
 
   generate-java-servlet-session-vars-page-helper-store(|x_ident):
     Property(x, k, s, annos) -> java|[
@@ -125,4 +127,5 @@ rules
     where <defined-java-type> s
         ; SimpleSort(t) := s
         ; x_class := t
+        ; e_HibSession := HibSession()
         */

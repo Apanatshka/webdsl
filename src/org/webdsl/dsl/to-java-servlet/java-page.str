@@ -273,6 +273,7 @@ rules
        ; if <fetch(?ReadOnlyPage)> mod*
          then bstm_readonly* := java:bstm*|[ this.isReadOnly = true; ]|
          else bstm_readonly* := [] end
+       ; e_HibSession := HibSession()
        
   cbds-is-web-service(|mod*) =
     <fetch(?WebService)> mod*

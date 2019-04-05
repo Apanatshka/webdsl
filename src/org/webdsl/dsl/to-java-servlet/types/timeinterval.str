@@ -81,3 +81,4 @@ rules
        ; e1 := <expression-to-java-servlet> e
        ; e2 := <expression-to-java-servlet> ti
        ; ppinvoke := <pp-webdsl-to-string; escape> ie
+       ; e_HibSession := HibSession()
