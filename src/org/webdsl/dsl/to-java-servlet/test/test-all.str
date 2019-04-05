@@ -185,9 +185,9 @@ strategies
         ; names := <bagof-AllTestNames <+ ![]>
         ; bstm* := <map(gen-call-test-class);concat> names
         ; e_HibSession := HibSession()
-        ; bstm1* := <map({\
+        ; bstm1* := <map(\
                            x -> bstm|[e_HibSession.createQuery("delete from "+"~x").executeUpdate(); ]|
-                       \})>
+                       \)>
                        ["ApplicationContextProperty"|["File"|<bagof-AllEntityNames>]]
 
   gen-call-test-class :
