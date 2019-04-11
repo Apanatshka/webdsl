@@ -1,5 +1,8 @@
 module org/webdsl/dsl/languages/action/rename
 
+imports
+  org/webdsl/dsl/typechecker/rename
+
 signature
   constructors
     EntityFunctionAnno : Term
