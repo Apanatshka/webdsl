@@ -270,13 +270,13 @@ rules
              else bstm_redirecthttps* :=[]
              end
          end
-       ; if <fetch(?ReadOnlyPage)> mod*
+       ; if <fetch(?ReadOnlyPage())> mod*
          then bstm_readonly* := java:bstm*|[ this.isReadOnly = true; ]|
          else bstm_readonly* := [] end
        ; e_HibSession := HibSession()
        
   cbds-is-web-service(|mod*) =
-    <fetch(?WebService)> mod*
+    <fetch(?WebService())> mod*
   ; !class-body-dec* |[
       public boolean isWebService(){
         return true;

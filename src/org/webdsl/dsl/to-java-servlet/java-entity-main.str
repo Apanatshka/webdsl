@@ -901,7 +901,7 @@ rules // One-to-Many association with Set
         //; x_ent := <concat-strings> [ent, ".class"]
         ; joinColumnName := <concat-strings> ["\\\"", ent, "_", fld, "\\\""]
         ; subselect* := <get-subselect-anno>
-        ; if <fetch(?InverseReferenceOnlyAnno)> annos
+        ; if <fetch(?InverseReferenceOnlyAnno())> annos
             then optannos* := [ anno|[ @org.hibernate.annotations.OptimisticLock(excluded=true) ]| | subselect*]
             else optannos* := subselect*
           end
@@ -1135,7 +1135,7 @@ rules //associations
     with  t_y       := <java-type> y_srt
         ; bstm0* := <association-update-statements(remove-bidirectional-reference)> annos
         ; bstm1* := <association-update-statements(add-bidirectional-reference)> annos
-        ; if <fetch(?InverseReferenceOnlyAnno)> annos 
+        ; if <fetch(?InverseReferenceOnlyAnno())> annos 
           then bstm2* :=  []
           else bstm2* :=  bstm*|[
                  if(item != null){ item.increaseVersion(); }
