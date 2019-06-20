@@ -1,0 +1,5 @@
+#!/bin/sh
+../imports.sh
+java -Xss32m -Xmx2G -jar /Users/jeff/Git/stratego-sep-comp-benchmark/stratego.build.bench/target/stratego.build.bench.jar -I . --verbose 3 -la stratego-lib -la stratego-rtg -la stratego-sglr -la stratego-gpp -la stratego-xtc -la stratego-aterm -la stratego-tool-doc -la java-front -clean -I org/webdsl/dsl/syntax/ -D PACKAGE_VERSION_TERM="`git rev-parse HEAD`" -I share/strategoxt/java_front/languages/stratego-java/ -m webdslc-main -i webdslc.str -o src-gen/org/webdsl/webdslc/Main.java -p org.webdsl.webdslc
+ecj -J-Xmx512m -J-Xms100m -J-server -J-XX:+UseParallelGC -source 5 -target 5 -nowarn -cp strategoxt.jar:src-gen:. src-gen/org/webdsl/webdslc/Main.java -d bin
+jar cfm webdsl.jar META-INF/MANIFEST.MF -C bin/ . -C src-gen/ org/webdsl/webdsl_front/HQL-pretty.pp.af -C src-gen/ org/webdsl/webdsl_front/WebDSL.tbl -C src-gen/ org/webdsl/webdsl_front/WebDSL-pretty.pp.af -C src-gen/ org/webdsl/write_files/Java-EBlock.rtg.af -C src-gen/ org/webdsl/webdslc/HQL-pretty.pp.af -C src-gen/ org/webdsl/webdslc/WebDSL.tbl -C src-gen/ org/webdsl/webdslc/WebDSL-pretty.pp.af -C src-gen/ org/webdsl/webdslc/Java-EBlock.rtg.af
